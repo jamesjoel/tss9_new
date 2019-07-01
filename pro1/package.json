@@ -1,0 +1,15 @@
+{
+  "name": "pro1",
+  "version": "1.0.0",
+  "description": "\"this is demo project\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "james",
+  "license": "ISC",
+  "dependencies": {
+    "error": "^7.0.2",
+    "sha1": "^1.1.1"
+  }
+}

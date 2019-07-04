@@ -5,7 +5,7 @@ var app = express();
 
 app.set("view engine", "ejs");
 // app.set("view engine", ["ejs", "pug"]);
-app.set("views", __dirname+"/views");
+// app.set("views", __dirname+"/views");
 
 
 app.get("/", function(req, res){

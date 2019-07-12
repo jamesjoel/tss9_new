@@ -1,0 +1,40 @@
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.bundle.js"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <table class="table table-hover table-dark table-bordered">
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Age</th>
+                    </tr>
+                    <% data.forEach(function(x, n){ %>
+                        <tr>
+                            <td><%= n+1 %></td>
+                            <td><%= x.name %></td>
+                            <td><%= x.city %></td>
+                            <td><%= x.age %></td>
+                        </tr>
+
+
+
+
+                    <% }) %>
+
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+

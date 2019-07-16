@@ -5,6 +5,8 @@ var MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017";
 var bodyParser = require("body-parser");
 
+var mongo = require("mongodb");
+
 
 
 
@@ -44,7 +46,7 @@ app.post("/add", function(req, res){
                 city : req.body.mycity
             }*/
 
-
+        // console.log(req.body);
 
 
     MongoClient.connect(url, function(err, client){
@@ -59,6 +61,68 @@ app.post("/add", function(req, res){
 
 
 
+});
+
+
+app.get("/view", function(req, res){
+    var id = req.query.id;
+    var objid = mongo.ObjectId(id);
+    MongoClient.connect(url, function(err, client){
+        var db = client.db("tss9_30");
+        db.collection("student").find({ _id : objid }).toArray(function(err, result){
+            console.log(result);
+            res.render("view", { data : result[0] });
+        });
+    });
+
+
+});
+
+app.get("/demo/:a/:b/:c/:d", function(req, res){
+    console.log(req.params);
+    var name = req.params.a;
+});
+
+
+
+
+
+
+
+
+
+app.get("/delete", function(req, res){
+    // console.log(req.query);
+    var id = req.query.myid;
+
+    var objid = mongo.ObjectId(id);
+
+
+    MongoClient.connect(url, function(err, client){
+        var db = client.db("tss9_30");
+        db.collection("student").remove({ _id : objid }, function(err, result){
+            // console.log(result);
+            res.redirect("/");
+        });
+    });
+
+
+
+});
+
+
+
+app.get("/edit/:id", function(req, res){
+    var id = req.params.id;
+    var objid= mongo.ObjectId(id);
+
+    MongoClient.connect(url, function(err, client){
+        var db = client.db("tss9_30");
+        db.collection("student").find({ _id : objid }).toArray(function(err, result){
+            console.log(result);
+            res.render("edit", { data : result[0] });
+        });
+    });
 });
 
 

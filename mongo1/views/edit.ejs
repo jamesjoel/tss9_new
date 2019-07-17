@@ -29,8 +29,8 @@
                 </div> 
               </nav>
     <div class="container mt-4">
-        <form action="/add" method="post">
-
+        <form action="/edit" method="post">
+            <input type="hidden" name="id" value="<%= data._id %>" />
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="form-group">
@@ -64,7 +64,7 @@
                     <label>Salary</label>
                     <input value="<%= data.salary %>" type="Text" name="salary" class="form-control" />
                 </div>
-                <input type="submit" value="Add" class="btn btn-primary"/>
+                <input type="submit" value="Update" class="btn btn-primary"/>
             </div>
         </div>
     </form>

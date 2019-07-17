@@ -1,8 +1,10 @@
 var express = require("express");
 var app = express();
 
-var MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017";
+var connect = require("./config/connect");
+var db = require("./config/db");
+
+
 var bodyParser = require("body-parser");
 
 var mongo = require("mongodb");
@@ -22,18 +24,16 @@ app.use(bodyParser());
 
 
 app.get("/", function(req, res){
-    MongoClient.connect(url, function(err, client){
-        if(err){
-            console.log("Connection Error", err);
-            return;
-        }
-        var db = client.db("tss9_30");
+    connect(function(err, client){
+
+        var db = client.db(db.dbName);
         db.collection("student").find().toArray(function(err, result){
             var obj = { data : result };
-            res.render("home", obj);
+            res.render("home", obj);            
         });
+        
     });
-
+    
 });
 
 app.get("/add", function(req, res){
@@ -49,8 +49,8 @@ app.post("/add", function(req, res){
         // console.log(req.body);
 
 
-    MongoClient.connect(url, function(err, client){
-        var db = client.db("tss9_30");
+    connect(function(err, client){
+        var db = client.db(db.dbName);
         db.collection("student").insert(req.body, function(err, result){
             console.log("data saved");
             res.redirect("/");
@@ -67,8 +67,8 @@ app.post("/add", function(req, res){
 app.get("/view", function(req, res){
     var id = req.query.id;
     var objid = mongo.ObjectId(id);
-    MongoClient.connect(url, function(err, client){
-        var db = client.db("tss9_30");
+    connect(function(err, client){
+        var db = client.db(db.dbName);
         db.collection("student").find({ _id : objid }).toArray(function(err, result){
             console.log(result);
             res.render("view", { data : result[0] });
@@ -98,8 +98,8 @@ app.get("/delete", function(req, res){
     var objid = mongo.ObjectId(id);
 
 
-    MongoClient.connect(url, function(err, client){
-        var db = client.db("tss9_30");
+    connect(function(err, client){
+        var db = client.db(db.dbName);
         db.collection("student").remove({ _id : objid }, function(err, result){
             // console.log(result);
             res.redirect("/");
@@ -116,13 +116,25 @@ app.get("/edit/:id", function(req, res){
     var id = req.params.id;
     var objid= mongo.ObjectId(id);
 
-    MongoClient.connect(url, function(err, client){
-        var db = client.db("tss9_30");
+    connect(function(err, client){
+        var db = client.db(db.dbName);
         db.collection("student").find({ _id : objid }).toArray(function(err, result){
             console.log(result);
             res.render("edit", { data : result[0] });
         });
     });
+});
+
+app.post("/edit", function(req, res){
+    var id = req.body.id;
+    var objid = mongo.ObjectId(id);
+    connect(function(err, client){
+        var db = client.db(db.dbName);
+        db.collection("student").update({ _id : objid }, { $set : req.body }, function(err, result){
+            res.redirect("/");
+        });
+    });
+
 });
 
 

@@ -1,0 +1,1 @@
+module.exports={ dbName : "tss9_30" };

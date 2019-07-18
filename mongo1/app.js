@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 
 var connect = require("./config/connect");
-var db = require("./config/db");
+var database = require("./config/db");
 
 
 var bodyParser = require("body-parser");
@@ -26,7 +26,7 @@ app.use(bodyParser());
 app.get("/", function(req, res){
     connect(function(err, client){
 
-        var db = client.db(db.dbName);
+        var db = client.db(database.dbName);
         db.collection("student").find().toArray(function(err, result){
             var obj = { data : result };
             res.render("home", obj);            
@@ -50,7 +50,7 @@ app.post("/add", function(req, res){
 
 
     connect(function(err, client){
-        var db = client.db(db.dbName);
+        var db = client.db(database.dbName);
         db.collection("student").insert(req.body, function(err, result){
             console.log("data saved");
             res.redirect("/");
@@ -68,7 +68,7 @@ app.get("/view", function(req, res){
     var id = req.query.id;
     var objid = mongo.ObjectId(id);
     connect(function(err, client){
-        var db = client.db(db.dbName);
+        var db = client.db(database.dbName);
         db.collection("student").find({ _id : objid }).toArray(function(err, result){
             console.log(result);
             res.render("view", { data : result[0] });
@@ -99,7 +99,7 @@ app.get("/delete", function(req, res){
 
 
     connect(function(err, client){
-        var db = client.db(db.dbName);
+        var db = client.db(database.dbName);
         db.collection("student").remove({ _id : objid }, function(err, result){
             // console.log(result);
             res.redirect("/");
@@ -117,7 +117,7 @@ app.get("/edit/:id", function(req, res){
     var objid= mongo.ObjectId(id);
 
     connect(function(err, client){
-        var db = client.db(db.dbName);
+        var db = client.db(database.dbName);
         db.collection("student").find({ _id : objid }).toArray(function(err, result){
             console.log(result);
             res.render("edit", { data : result[0] });
@@ -129,7 +129,7 @@ app.post("/edit", function(req, res){
     var id = req.body.id;
     var objid = mongo.ObjectId(id);
     connect(function(err, client){
-        var db = client.db(db.dbName);
+        var db = client.db(database.dbName);
         db.collection("student").update({ _id : objid }, { $set : req.body }, function(err, result){
             res.redirect("/");
         });

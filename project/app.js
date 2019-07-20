@@ -15,7 +15,11 @@ app.use(cookieParser());
 app.use(session({ secret : "TSS"}));
 app.use(flash());
 
-
+app.use(function(req, res, next){
+    // res.locals.logo = "TSS";
+    res.locals.session = req.session;
+    next();
+});
 
 
 app.use(routes);

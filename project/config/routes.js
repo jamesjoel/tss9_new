@@ -7,4 +7,11 @@ routes.use("/signup", require("../controllers/signup"));
 routes.use("/login", require("../controllers/login"));
 
 
+
+routes.get("/logout", function(req, res){
+    req.session.destroy();
+    res.redirect("/");
+});
+
+
 module.exports=routes;

@@ -36,6 +36,7 @@
                     <h1>Edit Detail</h1>
                       <form action="/edit" method="post">
                           <div class="form-group">
+                            <input type="hiddent" name="id"  value="<%= data._id %>"/>
                               <label>Name</label>
                               <input type="text" name="name" value="<%= data.name %>" class="form-control">
                           </div>
@@ -54,8 +55,9 @@
                           </div>
                           <div class="form-group">
                               <label>Gender</label>
-                             Male<input type="radio" name="gender" value="male" <% if(data.gender=="male") { %> checked="checked" <% } %>>
-                             Female <input type="radio" name="gender" value="female" <% if(data.gender=="female") {%> checked="checked" <% } %>>
+                              <br>
+                              Male<input type="Gender" name="gender" value="male">
+                              Female<input type="Gender" name="gender" value='female'>
                           </div>
                           <div class="form-group">
                               <label>Contact</label>

@@ -78,18 +78,33 @@ app.get("/edit",function(req,res){
 });
 
 
-app.post("/edit",function(req,res){
+// app.post("/edit",function(req,res){
 
-	var id = req.body.sid;
+// 	var id = req.body.sid;
 
-	var objid = mongodb.ObjectId(id);
-	MongoClient.connect(url,function(err,client){
-		var db = client.db("new1");
-		db.collection("new1").update({_id:objid},{$set : req.body},function(err,result){
-			console.log(result);
-			res.redirect("/");
-		});
-	});
+// 	var objid = mongodb.ObjectId(id);
+// 	MongoClient.connect(url,function(err,client){
+// 		var db = client.db("new1");
+// 		db.collection("new1").update({_id:objid},{$set : req.body},function(err,result){
+// 			console.log(result);
+// 			res.redirect("/");
+// 		});
+// 	});
+// });
+
+
+app.post("/edit", function(req, res){
+	console.log(req.body);
+    var id = req.body.id;
+    var objid = mongodb.ObjectId(id);
+    MongoClient.connect(url, function(err, client){
+        var db = client.db("new1");
+
+        db.collection("new1").updateOne({ _id : objid }, { $set : req.body }, function(err, result){
+            res.redirect("/");
+        });
+    });
+
 });
 
 var port = process.env.PORT || 3000;

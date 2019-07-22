@@ -7,4 +7,4 @@ routes.use("/signup", require("../controllers/signup"));
 routes.use("/login", require("../controllers/login"));
 
 
-module.exports=routes;
+module.exports = routes;

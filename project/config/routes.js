@@ -20,7 +20,7 @@ routes.use("/", require("../controllers/default"));
 routes.use("/signup", require("../controllers/signup"));
 routes.use("/login", require("../controllers/login"));
 routes.use("/profile",backdoor, require("../controllers/profile"));
-routes.use("/post", require("../controllers/post"));
+routes.use("/post", backdoor, require("../controllers/post"));
 
 
 

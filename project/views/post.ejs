@@ -9,10 +9,26 @@
             <div class="form-group">
                 <label>Post Image</label>
                 <input type="file" name="photo" class="form-control"/>
+                <p class="text-danger">
+                    <%= msg %>
+                </p>
             </div>
             <div class="form-group">
                 <input type="submit" value="Post" class="btn btn-primary"/>
             </div>
         </form>
     </div>
+</div>
+<div class="row">
+    <% result.forEach(function(x){ %>
+        <div class="col-md-3">
+            <div class="card">
+                <img src="/post_img/<%= x.image %>" height="200" class="card-img-top">
+                <div class="card-body">
+                    <p class="card-text"><%= x.title %></p>
+                    <a href="/post/delete/<%= x._id %>/<%= x.image %>" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    <% }) %>
 </div>

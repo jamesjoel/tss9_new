@@ -49,6 +49,8 @@ function backdoor(req, res, next){
 
 
 
+
+
 routes.get("/logout", function(req, res){
     req.session.destroy();
     res.redirect("/");

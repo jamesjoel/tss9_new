@@ -22,7 +22,7 @@ routes.post("/", function(req, res){
 
     //console.log(path.resolve()+"/public/post_img");
     photo.mv(path.resolve()+"/public/post_img/"+name, function(){
-
+   
     });
 });
 

@@ -19,6 +19,7 @@ var routes = express.Router();
 routes.use("/", require("../controllers/default"));
 routes.use("/signup", require("../controllers/signup"));
 routes.use("/login", require("../controllers/login"));
+routes.use("/citi", require("../controllers/citi"));
 routes.use("/profile",backdoor, require("../controllers/profile"));
 routes.use("/post", backdoor, require("../controllers/post"));
 

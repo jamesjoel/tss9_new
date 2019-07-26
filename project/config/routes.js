@@ -24,6 +24,8 @@ routes.use("/profile",backdoor, require("../controllers/profile"));
 routes.use("/post", backdoor, require("../controllers/post"));
 
 
+routes.use("/api", require("./api"));
+
 
 
 function backdoor(req, res, next){

@@ -1,6 +1,11 @@
 var express = require("express");
 var app = express(); // constructor calling
 
+app.get('/hello', (req, res) => {
+    return res.status(200).send({'message': 'YAY! Congratulations! Your first endpoint is working'});
+  });
+
+
 app.get("/", function(req, res){
     console.log("this is root calling");
 

@@ -2,7 +2,7 @@ var con = require("../config/connectmysql");
 
 module.exports.select=function(cb){
     con.connect(function(err){
-        var que = "SELECT * FROM cities";
+        var que = "SELECT * FROM cities LIMIT 10";
         con.query(que, cb);
     });
 }

@@ -3,6 +3,7 @@ var routes = express.Router();
 
 
 routes.use("/getuser", require("../controllers/getuser"));
+routes.use("/getcity", require("../controllers/getcity"));
 
 
 

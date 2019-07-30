@@ -27,6 +27,11 @@ routes.use("/post", backdoor, require("../controllers/post"));
 routes.use("/api", require("./api"));
 
 
+routes.all("*", function(req, res){
+    res.send("<h1>The Page Not Found !</h1>");
+});
+
+
 
 function backdoor(req, res, next){
     if(! req.session.is_user_logged_in){

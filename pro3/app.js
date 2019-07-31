@@ -41,8 +41,9 @@ app.get("/student", function(req, res){
 
 });
 
+var port = process.env.PORT || 3000;
 
-app.listen(3000, function(){
+app.listen(port, function(){
     console.log("Server Running");
 });
 // create server with 3000 port

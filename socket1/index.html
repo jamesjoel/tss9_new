@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Home Page</title>
+        <script src="socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            function send()
+            {
+                var msg = document.getElementById("msg").value;
+                var name = document.getElementById("name").value;
+
+                var obj = { msg : msg, name : name};
+                socket.emit("send", obj);
+            }
+
+
+
+            socket.on("sendFromServer", function(obj){
+                document.getElementById("msg-box").innerHTML+="<p><b>"+obj.name+" : </b>"+obj.msg+"</p>";
+
+            });
+
+        </script>
+    </head>
+    <body>
+     <h1>This is Home Page</h1>
+     Your Name <input type="text" id="name"/>
+     <br />
+     Message <Br />
+
+      <textarea id="msg" cols="30" rows="5"></textarea>
+      <Br />
+      <button onclick="send()">Send</button>
+      <div id="msg-box"></div>
+    </body>
+</html>

@@ -22,6 +22,7 @@ routes.use("/login", require("../controllers/login"));
 routes.use("/citi", require("../controllers/citi"));
 routes.use("/profile",backdoor, require("../controllers/profile"));
 routes.use("/post", backdoor, require("../controllers/post"));
+routes.use("/chat", backdoor, require("../controllers/chat"));
 
 
 routes.use("/api", require("./api"));

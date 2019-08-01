@@ -6,7 +6,8 @@ var session = require("express-session");
 var flash = require("express-flash");
 var cache = require("nocache");
 var fileUpload = require("express-fileupload");
-
+var http = require("http").createServer(app);
+var io = require("socket.io")(http);
 
 var routes = require("./config/routes");
 
@@ -24,6 +25,7 @@ app.use(fileUpload());
 
 app.use(function(req, res, next){
     // res.locals.logo = "TSS";
+    req.io=io;
     res.locals.session = req.session;
     next();
 });
@@ -33,6 +35,6 @@ app.use(routes);
 
 
 var port = process.env.PORT || 3000;
-app.listen(port, function(){
+http.listen(port, function(){
     console.log("Server Running");
 });

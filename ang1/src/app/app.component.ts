@@ -13,9 +13,15 @@ import { Component  } from '@angular/core';
 export class AppComponent {
   title = 'ang1';
   name = "rohit verma";
+
+
+  demo(){
+    console.log(this.title);
+    
+  }
+  
 }
 
-export class HelloWorld {
-  title = 'ang1';
-  name = "rohit verma";
-}
+
+
+

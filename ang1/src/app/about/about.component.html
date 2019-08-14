@@ -1,0 +1,24 @@
+<div>
+  <h1>this is about component</h1>
+  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quos nam laborum et iure assumenda exercitationem distinctio deserunt facere. Modi corporis sequi facilis dolor alias, doloremque iure quasi sunt quisquam.</p>
+
+  <input type="Text" [(ngModel)]="name"/>
+  <h2>{{ name }}</h2>
+
+  <table class="table table-dark" border="1" cellpadding="10">
+    <tr>
+      <th>S.No.</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>City</th>
+    </tr>
+    <tr *ngFor="let a of arr; let n=index">
+      <td>{{ n+1 }}</td>
+      <td>{{ a.name }}</td>
+      <td>{{ a.age }}</td>
+      <td>{{ a.city }}</td>
+    </tr>
+
+  </table>
+
+</div>

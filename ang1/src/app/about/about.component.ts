@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MyboxComponent } from '../mybox/mybox.component';
 
 @Component({
   selector: 'app-about',

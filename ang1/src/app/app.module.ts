@@ -7,12 +7,20 @@ import { AboutComponent } from './about/about.component';
 
 
 import { FormsModule } from '@angular/forms';
+import { ContactComponent } from './contact/contact.component';
+import { HomeComponent } from './home/home.component';
+import { MyboxComponent } from './mybox/mybox.component';
+import { TermsComponent } from './terms/terms.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent
+    AboutComponent,
+    ContactComponent,
+    HomeComponent,
+    MyboxComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,

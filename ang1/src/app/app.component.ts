@@ -13,6 +13,7 @@ import { Component  } from '@angular/core';
 export class AppComponent {
   title = 'ang1';
   name = "rohit verma";
+  
 
 
   demo(){

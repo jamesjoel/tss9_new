@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
+
+import { MyboxComponent } from '../mybox/mybox.component';
 
 @Component({
   selector: 'app-about',
@@ -25,12 +28,17 @@ export class AboutComponent implements OnInit {
       city : "indore"
     }
   ];
+  newname : string;
 
 
-
-  constructor() { }
+  constructor(private demo:Title) {
+    this.demo.setTitle("About Page");
+   }
 
   ngOnInit() {
+  }
+  change(){
+    this.newname=this.name;
   }
 
 }

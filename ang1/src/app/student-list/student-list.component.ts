@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 
 import { newData } from '../models/student-interface';
 
@@ -8,10 +8,11 @@ import { newData } from '../models/student-interface';
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.scss']
 })
-export class StudentListComponent implements OnInit {
+export class StudentListComponent implements OnInit, OnChanges{
 
   @Input() listName : string;
   @Input() listStu : newData;
+  @Output() demo = new EventEmitter();
 
 
 
@@ -30,9 +31,24 @@ export class StudentListComponent implements OnInit {
 
   constructor() { }
 
+   sendDataToParent()
+   {
+     this.demo.emit("rohit verma");
+     console.log("hello world");
+   }
+
+
   ngOnInit() {
     
 
   }
+  ngOnChanges(){
+    if(this.listStu){
+
+      this.data.push(this.listStu);
+
+    }
+  }
+  
 
 }

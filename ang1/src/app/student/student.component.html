@@ -18,9 +18,11 @@
     </div>
   </div>
 </div>
+<h2>{{ new_a }}</h2>
 
 <app-student-list 
   [listName]="name"
   [listStu]="addStu"
+  (demo)="receiveData($event)"
 >
 </app-student-list>

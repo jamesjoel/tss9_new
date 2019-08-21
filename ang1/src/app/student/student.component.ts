@@ -10,6 +10,7 @@ import { newData } from '../models/student-interface';
 export class StudentComponent implements OnInit {
 
   name = "TSS";
+  new_a:string;
 
   newStu:newData={
     name : "",
@@ -26,6 +27,16 @@ export class StudentComponent implements OnInit {
   add(){
     this.addStu = this.newStu;
     console.log(this.addStu);
+    this.newStu={
+      name : "",
+      age : null
+    };
+  }
+
+  receiveData(a:string)
+  {
+    console.log("-------",a);
+    this.new_a=a;
   }
 
 }

@@ -12,10 +12,7 @@ export class StudentComponent implements OnInit {
   name = "TSS";
   new_a:string;
 
-  newStu:newData={
-    name : "",
-    age : null
-  }; 
+  newStu:newData; 
   addStu:newData;
 
   constructor(private title : Title) {

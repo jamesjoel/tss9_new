@@ -3,6 +3,7 @@ import { Input, Output, EventEmitter } from '@angular/core';
 
 import { newData } from '../models/student-interface';
 
+
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -16,16 +17,7 @@ export class StudentListComponent implements OnInit, OnChanges{
 
 
 
-   data = [{
-
-     name : "rohit",
-     age : 25
-   },
-   {
-     name : "james",
-     age : 26
-   }
-   ];
+   data:newData[]=[];
 
 
 
@@ -46,7 +38,7 @@ export class StudentListComponent implements OnInit, OnChanges{
     if(this.listStu){
 
       this.data.push(this.listStu);
-
+      console.log(this.data);
     }
   }
   

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { MsgserviceService } from '../services/msgservice.service';
 
 
 import { MyboxComponent } from '../mybox/mybox.component';
+// import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-about',
@@ -31,12 +33,20 @@ export class AboutComponent implements OnInit {
   newname : string;
 
 
-  constructor(private demo:Title) {
+  constructor(private demo:Title, private x : MsgserviceService) {
     this.demo.setTitle("About Page");
    }
 
   ngOnInit() {
   }
+  
+  test()
+  {
+    this.x.sendMsg("hello world");
+  }
+
+
+
   change(){
     this.newname=this.name;
   }

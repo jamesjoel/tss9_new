@@ -7,9 +7,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class MsgserviceService {
 
-  sub = new Subject();
+  sub = new Subject<any>();
 
-  getMsg() : Observable<any>{
+  getMsg():Observable<any>{
     return this.sub.asObservable();
   }
 

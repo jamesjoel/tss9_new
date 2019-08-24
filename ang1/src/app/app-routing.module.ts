@@ -5,6 +5,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { TermsComponent } from './terms/terms.component';
 import { StudentComponent } from './student/student.component';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -14,6 +15,10 @@ const routes: Routes = [
     path : 'terms',
     component : TermsComponent
     
+  },
+  {
+    path : 'user',
+    component : UserComponent
   },
   {
     path : 'student',

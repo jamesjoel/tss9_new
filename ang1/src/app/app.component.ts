@@ -20,15 +20,21 @@ import { MsgserviceService } from './services/msgservice.service';
 export class AppComponent {
   title = 'ang1';
   name = "rohit verma";
-  
+  demo2 : string="TSS";
   msgArr:any[];
-  sub : Subscription;
+  // sub : Subscription;
   constructor(private a : MsgserviceService){
-    this.sub = this.a.getMsg().subscribe(data=>{
-      console.log(data);
+ this.a.getMsg().subscribe(data=>{
+      // console.log(data);
+      this.demo2=data;
      // this.msgArr.push(data);
     });
   }
+
+  test(){
+    
+  }
+
 
 
 

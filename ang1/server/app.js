@@ -4,7 +4,7 @@ var path = require('path');
 var MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017";
 // console.log(path.resolve("../"));
-
+var bodyParser = require("body-parser");
 app.use(express.static(path.resolve('../dist/ang1/')));
 
 app.use(function(req, res, next) {
@@ -13,7 +13,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
  });
-
+app.use(bodyParser());
 
 
 app.get("/", function(req, res){
@@ -28,6 +28,10 @@ app.get("/api/user", function(req, res){
             res.json(result);
         });
     });
+});
+app.post("/api/user", function(req, res){
+    console.log(req.body);
+    res.json({status : 200});
 });
 
 

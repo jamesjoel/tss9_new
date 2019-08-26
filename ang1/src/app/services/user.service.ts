@@ -9,9 +9,10 @@ export class UserService {
   constructor(private http : HttpClient) { }
 
   getUser(){
+
     return this.http.get<any>("http://localhost:3000/api/user");
   }
-  saveUser(obj){
-    return this.http.post<any>(url, obj);
+  saveUser(obj:any){
+    return this.http.post<any>("http://localhost:3000/api/user", obj);
   }
 }

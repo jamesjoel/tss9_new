@@ -8,12 +8,16 @@ import { StudentlistComponent } from './student/studentlist/studentlist.componen
 import { HttpClientModule } from '@angular/common/http';
 import { StudentService } from './services/student.service';
 import { StudentaddComponent } from './student/studentadd/studentadd.component';
+import { StudentdeleteComponent } from './student/studentdelete/studentdelete.component';
+import { StudentupdateComponent } from './student/studentupdate/studentupdate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentlistComponent,
-    StudentaddComponent
+    StudentaddComponent,
+    StudentdeleteComponent,
+    StudentupdateComponent
     
   ],
   imports: [

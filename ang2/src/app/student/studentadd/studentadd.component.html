@@ -1,5 +1,6 @@
 <div class="container">
     <div class="col-md-6 offset-md-3">
+        <h3>{{ newStudent._id ? 'Update Student' : 'Add New Student' }}</h3>
         <!-- <pre>{{ newStudent|json }}</pre> -->
         <div class="form-group">
             <label>Full Name</label>
@@ -13,6 +14,6 @@
             <label>Fee</label>
             <input type="text" class="form-control" [(ngModel)]="newStudent.fee" />
         </div>
-        <button class="btn btn-success" (click)="save()">Save</button>
+        <button class="btn btn-success" (click)="save()">{{ newStudent._id ? "Update" : "Add" }}</button>
     </div>
 </div>

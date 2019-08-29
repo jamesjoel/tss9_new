@@ -10,6 +10,7 @@ import { StudentService } from './services/student.service';
 import { StudentaddComponent } from './student/studentadd/studentadd.component';
 import { StudentdeleteComponent } from './student/studentdelete/studentdelete.component';
 import { StudentupdateComponent } from './student/studentupdate/studentupdate.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { StudentupdateComponent } from './student/studentupdate/studentupdate.co
     StudentlistComponent,
     StudentaddComponent,
     StudentdeleteComponent,
-    StudentupdateComponent
+    StudentupdateComponent,
+    ProductComponent
     
   ],
   imports: [

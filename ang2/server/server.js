@@ -35,25 +35,25 @@ app.get("/api/product", function(req, res){
         });
     });
 });
-/*
-app.delete("/api/user", function(req, res){
+
+app.delete("/api/product", function(req, res){
     var id = req.query.id;
     var objid = mongo.ObjectId(id);
     MongoClient.connect(url, function (err, client) {
         var db = client.db("tss9_30");
-        db.collection("student").remove({_id : objid}, function(err, result){
+        db.collection("product").remove({_id : objid}, function(err, result){
             res.json(result);
         });
     });
 });
-app.put("/api/user", function (req, res) {
+app.put("/api/product", function (req, res) {
     var id = req.query.id;
     var obj = req.body;
     delete obj._id;
     
     MongoClient.connect(url, function(err, client){
         var db = client.db("tss9_30");
-        db.collection("student").update({ _id : mongo.ObjectId(id)}, { $set : obj}, function(err, result){
+        db.collection("product").update({ _id : mongo.ObjectId(id)}, { $set : obj}, function(err, result){
             if(err){
                 console.log("%%%%%%%%%", err);
                 return;
@@ -64,7 +64,7 @@ app.put("/api/user", function (req, res) {
     });
 
 })
-*/
+
 app.post("/api/product", function(req, res){
     
     

@@ -17,11 +17,11 @@ export class ProductService {
 
   getProduct(id:string=""){
     if(id){
-      return this.http.get<product>(`http://localhost:3000/api/product?id=${id}`);
+      return this.http.get<product[]>(`http://localhost:3000/api/product?id=${id}`);
 
     }
     else{
-      return this.http.get<product>("http://localhost:3000/api/product");
+      return this.http.get<product[]>("http://localhost:3000/api/product");
 
     }
   }

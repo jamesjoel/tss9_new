@@ -14,7 +14,13 @@ interface product {
 })
 export class ProductComponent implements OnInit {
 
-  allProduct:product=[];
+  allProduct:product[]=[];
+  askDeleteObj:product={
+    name: "",
+    price: null,
+    type: ""
+  };
+
   newProduct:product={
     name : "",
     price : null,
@@ -25,15 +31,60 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.productServ.getProduct().subscribe(data=>{
+      console.log("--------",data);
+      // this.allProduct.push(data);
       this.allProduct=data;
-      console.log(this.allProduct);
-    })
+      
+    });
   }
   save(){
-    this.productServ.addProduct(this.newProduct).subscribe(data=>{
+    if(this.newProduct._id!=""){
+      this.productServ.editProduct(this.newProduct._id, this.newProduct).subscribe(data=>{
+        console.log("-----",data);
+        for(var i=0; i<this.allProduct.length; i++)
+        {
+          if(this.allProduct[i]._id==this.newProduct._id)
+          {
+            this.allProduct[i]=this.newProduct;
+          }
+        }
+      });
+    }
+    else{
+
+      this.productServ.addProduct(this.newProduct).subscribe(data=>{
+        console.log(data);
+        this.allProduct.push(this.newProduct);
+        this.newProduct={
+          name : "",
+          price : null,
+          type : ""
+        };
+      });
+    }
+  }
+  askAdd(){
+    this.newProduct = {
+      _id : "",
+      name: "",
+      price: null,
+      type: ""
+    };
+  }
+
+  askDelete(obj:product){
+    this.askDeleteObj=obj;
+  }
+  delete(){
+    this.productServ.deleteProduct(this.askDeleteObj._id).subscribe(data=>{
       console.log(data);
-      this.allProduct.push(data);
+      var id = this.allProduct.indexOf(this.askDeleteObj);
+      this.allProduct.splice(id, 1);
     });
+  }
+  askEdit(obj:product){
+    // this.newProduct=obj;
+    this.newProduct=Object.assign({}, obj);
   }
 
 }

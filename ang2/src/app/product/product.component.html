@@ -1,23 +1,27 @@
-<button data-toggle="modal" data-target="#addModal" class="btn btn-info">Add</button>
+<button data-toggle="modal" data-target="#addModal" class="btn btn-info" (click)="askAdd()">Add</button>
 <table class="table table-hover table-dark">
     <tr>
         <th>S.No.</th>
         <th>Name</th>
         <th>Price</th>
         <th>Type</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <tr *ngFor="let x of allProduct; let n=index">
         <td>{{ n+1 }}</td>
         <td>{{ x.name }}</td>
         <td>{{ x.price }}</td>
         <td>{{ x.type }}</td>
+        <td><button class="btn btn-info" (click)="askEdit(x)" data-target="#addModal" data-toggle="modal">Edit</button></td>
+        <td><button class="btn btn-danger" (click)="askDelete(x)" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
     </tr>
 </table>
 <div class="modal fade" id="addModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Add New Product</h3>
+                <h3>{{ newProduct._id ? "Update" : "Add New" }} Product</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -35,9 +39,27 @@
                 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" (click)="save()">Add</button>
+                <button class="btn btn-success" (click)="save()">{{ newProduct._id ? "Update" : "Add" }}</button>
                 <button class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Delete</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are You Sure want to delete this product : {{ askDeleteObj.name }}</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" (click)="delete()">Delete</button>
+                <button class="btn btn-dark" data-dismiss="modal">Cancle</button>
+            </div>
+        </div>
+    </div>
+</div>
+

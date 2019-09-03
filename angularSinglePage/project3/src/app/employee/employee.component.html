@@ -1,0 +1,18 @@
+
+<div class="container">
+        <table class="table table-hover table-dark table-bordered">
+            <tr>
+                <th>S.No.</th>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Gender</th>
+            </tr>
+            <tr *ngFor="let x of emplsitStore; let n = index">
+                <td>{{ n+1  }}</td>
+                <td>{{ x.name | uppercase}}</td>
+                
+                <td>${{ x.salary | dewaliBonus}}</td>
+                <td>{{ x.gender}}</td>
+            </tr>
+        </table>
+    </div>

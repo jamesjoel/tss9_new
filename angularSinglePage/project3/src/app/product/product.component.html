@@ -1,0 +1,31 @@
+<app-add-product 
+[editData]=editDataNew
+*ngIf="loaded"></app-add-product>
+
+<div class="text-center">
+        <a href="" class="btn btn-warning btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm"  (click)="loadMyChildComponent();">AddProduct</a>
+      </div>
+<div class="container">
+        <table class="table table-hover table-dark table-bordered">
+            <tr>
+                <th>S.No.</th>
+                <th>Name</th>
+                <th>price</th>
+                <th>category</th>
+            </tr>
+            <tr *ngFor="let x of productStore; let n = index">
+
+                <td>{{ n+1 }}</td>
+                <td>{{ x.name }}</td>
+                <td>{{ x.price }}</td>
+                <td>{{ x.category}}</td>
+            
+                <td><a  class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalLoginForm" (click)="editProductFormList(x)">Edit</a></td>
+
+                <td><a  class="btn btn-sm btn-danger" (click)="deleteProductFormList(x)">DeleData</a></td>
+
+               
+
+           </tr>
+        </table>
+    </div>

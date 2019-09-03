@@ -4,10 +4,15 @@ import { StudentlistComponent } from './student/studentlist/studentlist.componen
 import { StudentaddComponent } from './student/studentadd/studentadd.component';
 import { StudentdeleteComponent } from './student/studentdelete/studentdelete.component';
 import { ProductComponent } from './product/product.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 
 
 const routes: Routes = [
+  {
+    path : "employee",
+    component : EmployeeComponent
+  },
   {
     path : "student",
     component : StudentlistComponent

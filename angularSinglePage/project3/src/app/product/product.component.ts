@@ -43,20 +43,17 @@ export class ProductComponent implements OnInit {
 
 
   editProductFormList(x){
-    
-this.editDataNew ={
-  _id : x._id,
-  name: x.name,
-  price:x.price,
-  category:x.category
-}
-
     this.loaded=true;
+    
+    this.editDataNew ={
+      _id : x._id,
+      name: x.name,
+      price:x.price,
+      category:x.category
+    }
+    // console.log("------------DATA COMMIN", this.editDataNew);
 
         
-          // this.productList.editProduct(x).subscribe(data =>{
-          //       console.log(data);
-          // })
   }
   loadMyChildComponent(){
     this.loaded=true;

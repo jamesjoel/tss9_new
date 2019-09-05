@@ -14,6 +14,8 @@ import { StudentupdateComponent } from './student/studentupdate/studentupdate.co
 import { ProductComponent } from './product/product.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { BonusPipe } from './pipes/bonus.pipe';
+import { TeacherComponent } from './teacher/teacher.component';
+import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { BonusPipe } from './pipes/bonus.pipe';
     StudentupdateComponent,
     ProductComponent,
     EmployeeComponent,
-    BonusPipe
+    BonusPipe,
+    TeacherComponent,
+    TeacherListComponent
     
   ],
   imports: [

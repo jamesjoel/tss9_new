@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { MyProductService } from 'src/app/services/my-product.service';
 import { product } from 'src/interface/product';
 
@@ -7,11 +7,11 @@ import { product } from 'src/interface/product';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent implements OnInit, OnChanges {
   @Input() editData: product;
     addPorductList:product;
     saveproduct:product={
-              _id: "",
+             
              name:"",
              price:null,
              category:""
@@ -22,7 +22,7 @@ export class AddProductComponent implements OnInit {
  
    }
 
-  ngOnInit() {
+  ngOnChanges() {
     alert("product--------------");
       if(this.editData._id){
       this.saveproduct = this.editData;

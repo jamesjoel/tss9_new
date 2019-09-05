@@ -5,10 +5,33 @@ import { StudentaddComponent } from './student/studentadd/studentadd.component';
 import { StudentdeleteComponent } from './student/studentdelete/studentdelete.component';
 import { ProductComponent } from './product/product.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { TeacherComponent } from './teacher/teacher.component';
+import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 
 
 
 const routes: Routes = [
+  {
+    path : "admin",
+    loadChildren : ()=> import('./admin/admin.module').then(m=>m.AdminModule)
+                            /*  
+                              children:function(){
+                                import('').then(function(mode){
+                                  return mode.Adminmodule;
+                                })
+                              }
+                            */
+  },
+  {
+    path : "teacher",
+    component : TeacherComponent,
+    children : [
+      {
+        path : "list",
+        component : TeacherListComponent
+      }
+    ]
+  },
   {
     path : "employee",
     component : EmployeeComponent

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserGuard } from './user.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
     children : [
       {
         path : "",
-        component : DashboardComponent
+        component : DashboardComponent,
+        canActivate : [UserGuard]
       }
     ]
   }

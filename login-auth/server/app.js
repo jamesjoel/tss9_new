@@ -5,6 +5,11 @@ var MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017";
 var mongo = require("mongodb");
 var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
+var session = require("express-session");
+
+
+
 app.use(express.static(path.resolve('../dist/ang1/')));
 
 app.use(function (req, res, next) {
@@ -14,6 +19,7 @@ app.use(function (req, res, next) {
     next();
 });
 app.use(bodyParser());
+app.use(session({secret : "TSS"}));
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -21,16 +27,33 @@ app.get("/", function (req, res) {
     res.sendFile(path.resolve('../dist/ang1/index.html'));
 });
 
+
+app.get("/api/user/backdoor", function(req, res){
+    console.log(req.session);
+    if(req.session.user){
+        res.json(req.session.user);
+    }
+    else{
+        res.json(false);
+    }
+});
+
 app.post("/api/user/login", function(req, res){
     MongoClient.connect(url, function(err, client){
         var db = client.db("tss9_30");
         db.collection("user").find({email : req.body.email}).toArray(function(err, result){
             if(result.length<=0){
+         
                 res.json({status : 100});
             }
             else{
                 if(result[0].password == req.body.password){
-                    
+                    // console.log(result[0]);
+                    req.session.user={};
+                    req.session.user._id = result[0]._id;
+                    req.session.user.name = result[0].name;
+                    req.session.user.is_user_logged_in = true;
+                    console.log(req.session);
                     res.json({status : 200});
                     
                 }else{

@@ -25,9 +25,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   doLogin(){
     this.userLogin.checkEmail(this.user).subscribe(data=>{
-      console.log(data);
+      
       if(data.status==100){
         this.errorMsg="Email And Password Wrong";
       }
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
       }
       if(data.status==200){
         
-        this.router.navigate(['user']);
+       this.router.navigate(['user']);
       }
       
     });

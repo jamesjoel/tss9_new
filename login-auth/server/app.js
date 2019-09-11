@@ -7,19 +7,26 @@ var mongo = require("mongodb");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
+var cors = require("cors");
 
 
-
-app.use(express.static(path.resolve('../dist/ang1/')));
-
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+// app.use(express.static(path.resolve('../dist/ang1/')));
 app.use(bodyParser());
-app.use(session({secret : "TSS"}));
+app.use(cookieParser());
+app.use(session({ secret: "TSS"}));
+
+
+app.use(cors({
+    origin: [
+        "http://localhost:4200"
+    ], credentials: true
+}));
+// app.use(function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -31,14 +38,16 @@ app.get("/", function (req, res) {
 app.get("/api/user/backdoor", function(req, res){
     console.log(req.session);
     if(req.session.user){
-        res.json(req.session.user);
+        res.json({status : 200, user : req.session.user});
     }
     else{
-        res.json(false);
+        res.json({status: 400});
     }
 });
 
+
 app.post("/api/user/login", function(req, res){
+   
     MongoClient.connect(url, function(err, client){
         var db = client.db("tss9_30");
         db.collection("user").find({email : req.body.email}).toArray(function(err, result){
@@ -50,10 +59,10 @@ app.post("/api/user/login", function(req, res){
                 if(result[0].password == req.body.password){
                     // console.log(result[0]);
                     req.session.user={};
-                    req.session.user._id = result[0]._id;
+                    req.session.user.id = result[0]._id;
                     req.session.user.name = result[0].name;
                     req.session.user.is_user_logged_in = true;
-                    console.log(req.session);
+                                     
                     res.json({status : 200});
                     
                 }else{
@@ -65,7 +74,7 @@ app.post("/api/user/login", function(req, res){
     });
 });
 
-app.get("/api/user/backdoor", )
+
 
 
 app.get("/api/user", function (req, res) {

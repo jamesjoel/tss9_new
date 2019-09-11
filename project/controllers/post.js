@@ -23,13 +23,9 @@ routes.post("/", function(req, res){
     var photo = req.files.photo;
     var newname = changeName(photo.name);
 
-<<<<<<< HEAD
-    //console.log(path.resolve()+"/public/post_img");
-    photo.mv(path.resolve()+"/public/post_img/"+name, function(){
-   
-    });
-});
-=======
+
+
+
     if(photo.mimetype=="image/jpeg" || photo.mimetype=="image/jpg" || photo.mimetype=="image/png" || photo.mimetype=="image/gif")
     {
         if(photo.size <= (1024*1024*1))
@@ -55,13 +51,6 @@ routes.post("/", function(req, res){
         req.flash("msg", 'This File Type Not Allowed');
         res.redirect("/post");
     }
-    
-
->>>>>>> 265873029e06eaf54ded55f45e12d3dcb64e67cc
-
-
-
-
 
     //console.log(path.resolve()+"/public/post_img");
    

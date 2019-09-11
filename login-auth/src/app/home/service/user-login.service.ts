@@ -15,17 +15,19 @@ export class UserLoginService {
   constructor(private http : HttpClient) { }
 
   checkEmail(user:user){
-    return this.http.post<any>("http://localhost:3000/api/user/login", user);
+    return this.http.post<any>("http://localhost:3000/api/user/login", user, {
+      withCredentials: true  // <=========== important!
+    });
   }
   backdoor():any{
-    this.http.get<any>("http://localhost:3000/api/user/backdoor").subscribe(data=>{
-     console.log(data);
-     if(data){
-       return true;
-     }
-     else{
-       return false;
-     }
+    return this.http.get<any>("http://localhost:3000/api/user/backdoor", {
+      withCredentials: true  // <=========== important!
     });
+  }
+  check(){
+    return this.http.get<any>("http://localhost:3000/api/user/backdoor", {
+      withCredentials: true  // <=========== important!
+    });
+
   }
 }

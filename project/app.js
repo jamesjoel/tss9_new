@@ -30,6 +30,9 @@ app.use(function(req, res, next){
     next();
 });
 
+app.get("/api/user", function(req, res){
+    console.log(req.session);
+});
 
 app.use(routes);
 

@@ -13,11 +13,22 @@ export class UserGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       // this.userLogin.backdoor();
     // return true;
-    if(this.userLogin.backdoor()){
-      return true;
-    }else{
-      return this.router.parseUrl("/");
-    }
+    //console.log(this.userLogin.backdoor());
+    this.userLogin.backdoor().subscribe(data=>{
+      console.log(data);
+      if(data.status==200){
+        return true;
+      }
+      else{
+        return this.router.parseUrl("/");
+      }
+    });
+    // var status = this.userLogin.backdoor();
+    // if(status){
+    //   return true;
+    // }else{
+    //   return this.router.parseUrl("/");
+    // }
   }
   
 }

@@ -8,12 +8,7 @@ var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var cors = require("cors");
-
-
-// app.use(express.static(path.resolve('../dist/ang1/')));
-app.use(bodyParser());
-app.use(cookieParser());
-app.use(session({ secret: "TSS"}));
+var jwt = require("jsonwebtoken");
 
 
 app.use(cors({
@@ -21,6 +16,35 @@ app.use(cors({
         "http://localhost:4200"
     ], credentials: true
 }));
+
+
+function verifyToken(req, res, next) {
+    if (!req.headers.authorization) {
+        return res.status(401).send('Unauthorized request')
+    }
+    let token = req.headers.authorization.split(' ')[1]
+    if (token === 'null') {
+        return res.status(401).send('Unauthorized request')
+    }
+    let payload = jwt.verify(token, 'TSS')
+    if (!payload) {
+        return res.status(401).send('Unauthorized request')
+    }
+    req.userId = payload.user;
+    next();
+}
+
+
+
+
+
+// app.use(express.static(path.resolve('../dist/ang1/')));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({ secret: "TSS"}));
+
+
+
 // app.use(function (req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
 //     res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
@@ -46,38 +70,80 @@ app.get("/api/user/backdoor", function(req, res){
 });
 
 
-app.post("/api/user/login", function(req, res){
+// app.post("/api/user/login", function(req, res){
    
+//     MongoClient.connect(url, function(err, client){
+//         var db = client.db("tss9_30");
+//         db.collection("user").find({email : req.body.email}).toArray(function(err, result){
+//             if(result.length<=0){
+         
+//                 res.json({status : 100});
+//             }
+//             else{
+//                 if(result[0].password == req.body.password){
+//                     // console.log(result[0]);
+//                     req.session.user={};
+//                     req.session.user.id = result[0]._id;
+//                     req.session.user.name = result[0].name;
+//                     req.session.user.is_user_logged_in = true;
+                                     
+//                     res.json({status : 200});
+                    
+//                 }else{
+                    
+//                     res.json({status : 300});
+//                 }
+//             }
+//         });
+//     });
+// });
+
+
+app.post('/api/user/login', (req, res) => {
+    let userData = req.body;
     MongoClient.connect(url, function(err, client){
         var db = client.db("tss9_30");
-        db.collection("user").find({email : req.body.email}).toArray(function(err, result){
+        db.collection("user").find({ email: req.body.email }).toArray(function(err, result){
             if(result.length<=0){
-         
-                res.json({status : 100});
-            }
-            else{
-                if(result[0].password == req.body.password){
-                    // console.log(result[0]);
-                    req.session.user={};
-                    req.session.user.id = result[0]._id;
-                    req.session.user.name = result[0].name;
-                    req.session.user.is_user_logged_in = true;
-                                     
-                    res.json({status : 200});
+                res.status(401).send('Invalid Email');
+            }else{
+                if(result[0].password !==req.body.password){
                     
+                    res.status(401).send('Invalid Password');
                 }else{
-                    
-                    res.json({status : 300});
+                    var userObj = { user : result[0]._id };
+                    let token = jwt.sign(userObj, 'TSS')
+                    res.status(200).send({ token });
                 }
+
             }
         });
     });
-});
+
+
+
+    // User.findOne({ email: userData.email }, (err, user) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         if (!user) {
+    //             res.status(401).send('Invalid Email')
+    //         } else
+    //             if (user.password !== userData.password) {
+    //                 res.status(401).send('Invalid Password')
+    //             } else {
+    //                 let payload = { subject: user._id }
+    //                 let token = jwt.sign(payload, 'secretKey')
+    //                 res.status(200).send({ token })
+    //             }
+    //     }
+    // })
+})
 
 
 
 
-app.get("/api/user", function (req, res) {
+app.get("/api/user", verifyToken, function (req, res) {
 
     var where = {};
     if (req.query.id) {

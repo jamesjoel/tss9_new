@@ -28,18 +28,19 @@ export class LoginComponent implements OnInit {
   
   doLogin(){
     this.userLogin.checkEmail(this.user).subscribe(data=>{
+      console.log(data);
       
-      if(data.status==100){
-        this.errorMsg="Email And Password Wrong";
-      }
-      if(data.status==300){
-          this.errorMsg="Password Wrong";
+      // if(data.status==100){
+      //   this.errorMsg="Email And Password Wrong";
+      // }
+      // if(data.status==300){
+      //     this.errorMsg="Password Wrong";
 
-      }
-      if(data.status==200){
+      // }
+      // if(data.status==200){
         
-       this.router.navigate(['user']);
-      }
+      //  this.router.navigate(['user']);
+      // }
       
     });
   }

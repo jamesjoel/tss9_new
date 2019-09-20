@@ -23,9 +23,10 @@ export class UserLoginService {
   }
 
   backdoor(){
-    this.http.get<any>("http://localhost:3000/api/user/backdoor", {
+    return this.http.get<any>("http://localhost:3000/api/user/backdoor", {
       withCredentials: true  // <=========== important!
-    }).toPromise();
+    });
+    
     
       
   }
@@ -34,5 +35,19 @@ export class UserLoginService {
       withCredentials: true  // <=========== important!
     });
 
+  }
+  getData(){
+    return this.http.get<any>("http://localhost:3000/api/usercheck", {
+      withCredentials: true
+    })
+  }
+
+
+  getToken() {
+    return localStorage.getItem('token')
+  }
+
+  loggedIn() {
+    return !!localStorage.getItem('token')
   }
 }

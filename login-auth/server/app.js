@@ -60,13 +60,26 @@ app.get("/", function (req, res) {
 
 
 app.get("/api/user/backdoor", function(req, res){
-    console.log(req.session);
-    if(req.session.user){
-        res.json({status : 200, user : req.session.user});
+    console.log("--------------------------");
+    if (!req.headers.authorization){
+        res.status(401).send('Unauthorized request')
+        return;
+        
     }
-    else{
-        res.json({status: 400});
+    let token = req.headers.authorization.split(' ')[1];
+    if(token==null){
+        res.status(401).send('Unauthorized request')
+        return;
+        
     }
+    let payload = jwt.verify(token, 'TSS');
+    if(!payload){
+        
+        res.status(401).send('Unauthorized request')
+        return;
+    }
+    console.log("****************",payload);
+    res.status(200).send(payload);
 });
 
 
@@ -100,19 +113,22 @@ app.get("/api/user/backdoor", function(req, res){
 
 
 app.post('/api/user/login', (req, res) => {
-    let userData = req.body;
+    
     MongoClient.connect(url, function(err, client){
         var db = client.db("tss9_30");
         db.collection("user").find({ email: req.body.email }).toArray(function(err, result){
+            console.log(result);
             if(result.length<=0){
-                res.status(401).send('Invalid Email');
+                // res.status(401).send('Invalid Email');
+                res.json({status : 100});
             }else{
-                if(result[0].password !==req.body.password){
+                if(result[0].password != req.body.password){
+                    res.json({status : 300});
                     
-                    res.status(401).send('Invalid Password');
+                    // res.status(401).send('Invalid Password');
                 }else{
-                    var userObj = { user : result[0]._id };
-                    let token = jwt.sign(userObj, 'TSS')
+                    var payload = { user : result[0]._id };
+                    let token = jwt.sign(payload, 'TSS')
                     res.status(200).send({ token });
                 }
 
@@ -139,7 +155,6 @@ app.post('/api/user/login', (req, res) => {
     //     }
     // })
 })
-
 
 
 

@@ -14,6 +14,21 @@ export class AuthService {
   constructor(private _http : HttpClient, private _router : Router) { }
 
   login(user:user){
-    return this._http.post<user>("http://localhost:3000/api/login", user);
+    return this._http.post<any>("http://localhost:3000/api/login", user);
+  }
+  isLoggedIn(){
+    if(localStorage.getItem("token")){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  getToken(){
+    return localStorage.getItem("token");
+  }
+  logout(){
+    localStorage.removeItem("token");
+    this._router.navigate(["/"]);
   }
 }

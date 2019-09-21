@@ -1,9 +1,23 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../service/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(
+    private _http : HttpClient,
+    private _authService : AuthService
+  ) { }
+
+  getUserData(){
+    return this._http.get<any>("http://localhost:3000/api/user/getuser", 
+      { headers: { Authorization : this._authService.getToken()}
+    });
+  }
+
+  
+
 }

@@ -11,7 +11,8 @@
 <div class="collapse navbar-collapse" id="collapsibleNavbar">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="#">Login</a>
+      <a class="nav-link" *ngIf="! _authService.isLoggedIn()" href="#">Login</a>
+      <a style="cursor:pointer" class="nav-link" (click)="_authService.logout()" *ngIf="_authService.isLoggedIn()">Logout</a>
     </li>
     
   </ul>

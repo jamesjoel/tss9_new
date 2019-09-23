@@ -9,6 +9,7 @@ import { UserService  } from '../service/user.service';
 export class UserComponent implements OnInit {
 
   arr=[];
+  path:string="";
   constructor(
     private _userService : UserService
   ) { }
@@ -18,6 +19,18 @@ export class UserComponent implements OnInit {
       res=>{
         console.log(res);
         this.arr=res;
+      }
+    )
+  }
+  doUpload(event){
+    // console.log("------",event.target.files[0]);
+    this._userService.fileUpload(event.target.files[0]).subscribe(
+      res=>{
+        console.log("-----",res);
+        this.path = res.fileurl;
+      },
+      err=>{
+        console.log(err);
       }
     )
   }

@@ -17,6 +17,14 @@ export class UserService {
       { headers: { Authorization : this._authService.getToken()}
     });
   }
+  fileUpload(file:File){
+    var formData = new FormData();
+    formData.append("myfile", file);
+    return this._http.post<any>("http://localhost:3000/api/fileupload",
+    formData,
+      { headers: { Authorization: this._authService.getToken() }}
+    )
+  }
 
   
 

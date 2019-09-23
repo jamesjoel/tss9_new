@@ -1,4 +1,9 @@
 <h2>Welcome User</h2>
 <div class="container">
     {{ arr }}
+
+    <input type="file" name="newfile" (change)="doUpload($event)"/>
+
+    <img [src]="path" />
 </div>
+

@@ -1,0 +1,14 @@
+<p>template-variable works!</p>
+<input type="text" #demo (keyup)='show1(demo)'/>
+<h1 #demo2>hello</h1>
+{{ demo.value }}
+<input type="text" value="{{ demo.value }}" />
+<button (click)="show(demo, demo2)" >OK</button>
+<Br />
+<Br />
+<Br />
+<form #myForm="ngForm" (ngSubmit)="register(myForm)">
+    <input type="text"  name="email" ngModel/>
+    <br />
+    <input type="submit" />
+</form>
